@@ -75,12 +75,81 @@
   \begin{block}{}
     \begin{itemize}
       \item{Simple example: single binary outcome. We want the parrot to mimic us when we say 'Yes' or 'No'.}
-	\item{So give lots of 'Yes', 'No' training data; give the parrot treats but reduce the treats by $\log(\text{\% correctness of the parrot's response})$ (a negative number). This is called \textit{cross-entropy loss}}
+	\item{So give lots of 'Yes', 'No' training data; give the parrot treats but reduce the treats by the non-positive number $\log(\text{\% correctness of the parrot's response})$. This is called \textit{cross-entropy loss}.}
     \end{itemize}
   \end{block}
 \end{frame}
 
 
+\begin{frame}{Parrot training}
+	\begin{columns}
+           \column{0.58\linewidth}
+    \begin{itemize}
+      \item{The neural network is incentivised to model the identity function $\tilde{x_1} = x_1$.}
+	\item{Depending on the flexibility of the neural network the parrot will get this exactly or approximately correct.}
+    \end{itemize}
+          \column{0.38\linewidth}
+             \centering
+             \includegraphics[height=5cm, width=3.5cm]{image_01}
+         \end{columns} 
+\end{frame}
+
+\begin{frame}{Deaf parrot}
+	\begin{columns}
+           \column{0.58\linewidth}
+    \begin{itemize}
+      \item{Deaf parrot = no link between input and output.}
+	\item{Parrot still squawks and gets feedback (more treats if the squawk accidentally matched the unheard training input).}
+	\item{If say 75\% of the training data was 'Yes' then the parrot will learn to say 'Yes' more often. Optimal strategy will be a word that is 75\% 'Yes' and 25\% 'No'.}
+    \end{itemize}
+          \column{0.38\linewidth}
+             \centering
+             \includegraphics[height=5cm, width=3.5cm]{image_02}
+         \end{columns} 
+\end{frame}
+
+\begin{frame}{Deaf parrot}
+    \begin{itemize}
+      \item{So by removing links from the neural network but still rewarding the network for mimicry we create a density estimator.}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Two word phrase}
+    \begin{itemize}
+      \item{Now consider two word phrases ("Yes, No").}
+	\item{If there is no correlation between the two words then we just need two deaf parrots.}
+	\item{But generally $p(x_1 \& x_2) = p(x_1) p(x_2 | x_1)$.}
+	\item{To model this: one deaf parrot for $p(x_1)$ as before. But for the second parrot: unmask its ears, let it hear the training word told to the first parrot, the re-mask its ears for the second word.}
+	\item{Give treats as before (still encouraging mimicry).}
+	\item{Easy to show that the second parrot learns $p(x_2 | x_1)$.}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Two word phrase}
+	\begin{columns}
+           \column{0.46\linewidth}
+    \begin{itemize}
+    \item{More generally if $\tilde{x_i}$ is linked only to $x_1, \dots x_{i-1}$ then we learn $p(x_1), \dots p(x_i | x1 \dots x_{i-1})$ whose product is $p(x)$.}
+    \end{itemize}
+          \column{0.5\linewidth}
+             \centering
+             \includegraphics[height=5cm]{image_03}
+         \end{columns} 
+\end{frame}
+
+\begin{frame}{Autoencoder; Autoregressive autoencoder}
+    \begin{itemize}
+      \item{The 'hearing' parrot (that mimics) is an \textit{autoencoder}.}
+	\item{The network of partially-deaf parrots (that learns the conditional probabilities) is called an \textit{autoregressive autoencoder}.}
+	\item{Autoregression appears in other contexts e.g. predicting the next element in a causal sequence.}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Figure 1 from MADE paper}
+     \centering
+     \includegraphics[height=7cm]{image_04}
+\end{frame}
 
 
 
