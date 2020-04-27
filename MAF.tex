@@ -1,22 +1,6 @@
-% http://www.ctan.org/tex-archive/macros/latex/contrib/beamer/examples
-% http://latex.artikel-namsu.de/english/beamer-examples.html
-
-%\documentclass{beamer}
 \documentclass[usenames,dvipsnames]{beamer}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{bm}
-\usepackage{fancybox, graphicx}
-\usepackage{listings}
-\usepackage{tikz} % Diagrams
-\usetikzlibrary{positioning}
-\usepackage{color}
-\usepackage{xcolor}
-\usepackage{textcomp} % See https://tex.stackexchange.com/questions/145416/how-to-have-straight-single-quotes-in-lstlistings
-%\usepackage[font=small,labelfont=bf]{caption} % Required for specifying captions to tables and figures. From https://tex.stackexchange.com/questions/238636
-\usepackage[absolute,overlay]{textpos}
 
-
+\DeclareMathOperator{\jac}{Jac}
 
 
 \usetheme{boxes}
@@ -26,7 +10,7 @@
 \title{MAF: \\ Masked Autoregressive Flow for Density Estimation}
 \author{Lorne Whiteway \\ lorne.whiteway@star.ucl.ac.uk}
 \institute{Astrophysics Group \\ Department of Physics and Astronomy \\ University College London}
-\date{27 April 2020 \\ Find the presentation at \alert{\url{https://tinyurl.com/???}}}
+\date{27 April 2020 \\ Find the presentation at \alert{\url{https://tinyurl.com/y72sf93t}}}
 
 \begin{document}
 
@@ -130,7 +114,7 @@
 	\begin{columns}
            \column{0.46\linewidth}
     \begin{itemize}
-    \item{More generally if $\tilde{x_i}$ is linked only to $x_1, \dots x_{i-1}$ then we learn $p(x_1), \dots, p(x_i | x1 \dots x_{i-1})$ whose product is $p(x)$.}
+    \item{More generally if $\tilde{x_i}$ is linked only to $x_1, \dots x_{i-1}$ then we learn $p(x_1), \dots, p(x_i | x1 \dots x_{i-1})$, whose product is $p(x)$.}
     \end{itemize}
           \column{0.5\linewidth}
              \centering
@@ -173,7 +157,7 @@
 \begin{frame}{More complicated distributions}
     \begin{itemize}
       \item{To handle continuous distributions:}
-	\item{Assume each univariate conditional distribution $p(x_i | x_1, \dots, x_{i-1})$ is Gaussian;}
+	\item{Model each univariate conditional distribution $p(x_i | x_1, \dots, x_{i-1})$ as a Gaussian;}
 	\item{Two output cells for each input: one for mean and one for (log of) standard deviation - from this we easily calculate the conditional probabilities and hence the overall probability of any given input;}
 	\item{Loss function is now sum of negative logs of probabilities of training data.}
     \end{itemize}
@@ -206,9 +190,9 @@
 
 \begin{frame}{Sampling from the inferred probability density 2}
     \begin{itemize}
-      \item{Furthermore the autoregressive property means that the Jacobian of $f^-1$ is triangular.}
+      \item{Furthermore the autoregressive property means that the Jacobian of $f^{-1}$ is triangular.}
 	\item{Its diagonal elements are just the $exp(-\alpha_i)$ factors.}
-	\item{So the determinant of $Jac(f^-1)$ is easy to calculate.}
+	\item{So the determinant of $\jac(f^{-1})$ is easy to calculate.}
     \end{itemize}
 \end{frame}
 
@@ -217,7 +201,7 @@
       \item{So $f$ maps $N(0, I)$ to $\tilde{p}$.}
 	\item{Such $f$ is called a normalising flow.}
 	\item{Recall how probability densities transform: \\
-	$\tilde{p}(x) = \mathcal{N}_{(0, I)}(f^{-1}(x)) \lvert det(Jac(f^{-1})) \rvert$}
+	$\tilde{p}(x) = \mathcal{N}_{(0, I)}(f^{-1}(x)) \ \lvert \det(\jac(f^{-1})) \rvert$}
 	\item{All of these components are easy to calculate, and let us evaluate and sample from $\tilde{p}$.}
     \end{itemize}
 \end{frame}
