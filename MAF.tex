@@ -222,9 +222,37 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Example}
+\begin{frame}{Example - Neural net}
      \centering
      \includegraphics[height=5cm]{image_06}
+\end{frame}
+
+\begin{frame}{Example - Target distribution}
+     \centering
+     \includegraphics[height=7cm]{image_07}
+\end{frame}
+
+\begin{frame}{Example - inferred distribution}
+     \centering
+     \includegraphics[height=5cm]{image_08}
+\end{frame}
+
+\begin{frame}{Inverse image of inferred distribution - should be $N(0, I)$}
+     \centering
+     \includegraphics[height=5cm]{image_09}
+\end{frame}
+
+\begin{frame}{MAF idea}
+    \begin{itemize}
+      \item{Map the original training data back through $f^{-1}$ to get $\{u_i\}$ that should be $N(0, I)$ but aren't;}
+      \item{Repeat the whole process! Treat the $u$ as training data for a new neural net that is trying to model the $u$ as a distorted $N(0, I)$}
+      \item{Be prepared to do this five or ten iterations.}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{MAF - after two iterations}
+     \centering
+     \includegraphics[height=5cm]{image_10}
 \end{frame}
 
 
