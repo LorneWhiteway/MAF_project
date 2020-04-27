@@ -11,6 +11,7 @@
 \usepackage{tikz} % Diagrams
 \usetikzlibrary{positioning}
 \usepackage{color}
+\usepackage{xcolor}
 \usepackage{textcomp} % See https://tex.stackexchange.com/questions/145416/how-to-have-straight-single-quotes-in-lstlistings
 %\usepackage[font=small,labelfont=bf]{caption} % Required for specifying captions to tables and figures. From https://tex.stackexchange.com/questions/238636
 \usepackage[absolute,overlay]{textpos}
@@ -30,5 +31,35 @@
 \begin{document}
 
 \frame{\titlepage}
+
+\begin{frame}{Context}
+  \begin{block}{}
+    \begin{itemize}
+      \item{\textit{Supervised machine learning} i.e. selecting from a highly-parameterised family of non-linear functions to fit some training data.}
+      \item{Fitting is done to optimise a utility function that \textcolor{red}{rewards a close match to the training data} and \textcolor{blue}{penalises complexity i.e. enforces \textit{regularization}}.}
+      \item{\textcolor{blue}{Regularisation is also provided by any lack-of-flexibility in the fitting functions.}}
+      \item{Bayesian framework: \textcolor{red}{adherence to training data = likelihood}; \textcolor{blue}{regularisation = prior}.}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Density Estimation}
+  \begin{block}{}
+    \begin{itemize}
+      \item{We want to do ML to do density estimation:}
+      \item{Find the probability density $p$, given a set of training data $\{x_i\}$ that we suppose to be a fair random sample from $p$.}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{MAF}
+  \begin{block}{}
+    \begin{itemize}
+      \item{We want to do ML to do density estimation:}
+      \item{Find the probability density $p$, given a set of training data $\{x_i\}$ that we suppose to be a fair random sample from $p$.}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
 
 \end{document}
