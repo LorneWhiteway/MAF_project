@@ -130,7 +130,7 @@
 	\begin{columns}
            \column{0.46\linewidth}
     \begin{itemize}
-    \item{More generally if $\tilde{x_i}$ is linked only to $x_1, \dots x_{i-1}$ then we learn $p(x_1), \dots p(x_i | x1 \dots x_{i-1})$ whose product is $p(x)$.}
+    \item{More generally if $\tilde{x_i}$ is linked only to $x_1, \dots x_{i-1}$ then we learn $p(x_1), \dots, p(x_i | x1 \dots x_{i-1})$ whose product is $p(x)$.}
     \end{itemize}
           \column{0.5\linewidth}
              \centering
@@ -151,6 +151,81 @@
      \includegraphics[height=7cm]{image_04}
 \end{frame}
 
+\begin{frame}{Sampling from the inferred probability density}
+    \begin{itemize}
+      \item{Use $(0, 0)$ as input to get $(\tilde{x_1}, \tilde{x_2})$ as output;}
+	\item{Randomly choose $s_1$ in $\{0, 1\}$ with probability $\tilde{x_1}$ of being 1;}
+	\item{Use $(s_1, 0)$ as input to get new $(\tilde{\tilde{x_1}}, \tilde{\tilde{x_2}})$ as output;}
+	\item{Randomly choose $s_2$ in $\{0, 1\}$ with probability $\tilde{\tilde{x_2}}$ of being 1;}
+	\item{Then $(s_1, s_2)$ is a new sample from the inferred density.}
+	\item{Takes $D$ evaluations of the net to get one new sample.}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{More complicated distributions}
+    \begin{itemize}
+      \item{So far we have looked at binary distributions.}
+	\item{Here the probability density could be described by a single number ($= p(x_i = 1)$). So output $\tilde{x_i}$ has dual meaning as `best guess at $x_i$' and as `$p(x_i = 1 | x1, \dots, x_{i-1})$'.}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{More complicated distributions}
+    \begin{itemize}
+      \item{To handle continuous distributions:}
+	\item{Assume each univariate conditional distribution $p(x_i | x_1, \dots, x_{i-1})$ is Gaussian;}
+	\item{Two output cells for each input: one for mean and one for (log of) standard deviation - from this we easily calculate the conditional probabilities and hence the overall probability of any given input;}
+	\item{Loss function is now sum of negative logs of probabilities of training data.}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{More complicated distributions}
+     \centering
+     \includegraphics[height=7cm]{image_05}
+\end{frame}
+
+
+\begin{frame}{Sampling from the inferred probability density $\tilde{p}$}
+    \begin{itemize}
+      \item{As before we can create new samples with $D$ calls to the neural net.}
+	\item{At each step we randomly choose $u_i$ from $N(0, 1)$ and scale and shift it to get $\tilde{x_i} = \exp(\alpha) * u_i + \mu$.}
+	\item{At each step the $\alpha$ and $\mu$ come from a call to the net with $\tilde{x_1}, \dots, \tilde{x_{i-1}}$ as inputs.}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Sampling from the inferred probability density 1}
+    \begin{itemize}
+      \item{Thus we get a mapping $f$ from $u \sim N(0, I)$ to $\tilde{x} \sim \tilde{p}$.}
+	\item{The mapping is easily invertible!}
+	\item{$u_i = (\tilde{x_i} - \mu) \exp(-\alpha)$}
+	\item{All the $\mu$ and $\alpha$ that we need are available in \textbf{one} call to the net (as here we have all the net input values that we need).}
+	\item{This gives $f^{-1}$ mapping $\tilde{p}$ to $N(0, I)$.}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Sampling from the inferred probability density 2}
+    \begin{itemize}
+      \item{Furthermore the autoregressive property means that the Jacobian of $f^-1$ is triangular.}
+	\item{Its diagonal elements are just the $exp(-\alpha_i)$ factors.}
+	\item{So the determinant of $Jac(f^-1)$ is easy to calculate.}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Normalising flow}
+    \begin{itemize}
+      \item{So $f$ maps $N(0, I)$ to $\tilde{p}$.}
+	\item{Such $f$ is called a normalising flow.}
+	\item{Recall how probability densities transform: \\
+	$\tilde{p}(x) = \mathcal{N}_{(0, I)}(f^{-1}(x)) \lvert det(Jac(f^{-1})) \rvert$}
+	\item{All of these components are easy to calculate, and let us evaluate and sample from $\tilde{p}$.}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+     \centering
+     \includegraphics[height=5cm]{image_06}
+\end{frame}
 
 
 
