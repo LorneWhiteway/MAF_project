@@ -55,11 +55,34 @@
 \begin{frame}{MAF}
   \begin{block}{}
     \begin{itemize}
-      \item{We want to do ML to do density estimation:}
-      \item{Find the probability density $p$, given a set of training data $\{x_i\}$ that we suppose to be a fair random sample from $p$.}
+      \item{We will discuss the MAF algorithm: Papamakarios et al. 2018; Masked Autoregressive Flow for Density Estimation; \url{https://arxiv.org/abs/1705.07057}.}
+      \item{Based on earlier algorithms of which the most relevant is MADE: Germain et al. 2015; MADE: Masked Autoencoder for Distribution Estimation; \url{https://arxiv.org/abs/1502.03509}.}
+	\item{I will focus first on MADE as all the key ideas are present there.}
     \end{itemize}
   \end{block}
 \end{frame}
+
+\begin{frame}{Analogy}
+  \begin{block}{}
+    \begin{itemize}
+      \item{An \textit{autoencoder} is like a parrot - it learns to mimic.}
+	\item{An \textit{autoregressive autoencoder} is like a deaf parrot - it learns to play the probabilities (and hence becomes a density estimator).}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Parrot training}
+  \begin{block}{}
+    \begin{itemize}
+      \item{Simple example: single binary outcome. We want the parrot to mimic us when we say 'Yes' or 'No'.}
+	\item{So give lots of 'Yes', 'No' training data; give the parrot treats but reduce the treats by $\log(\text{\% correctness of the parrot's response})$ (a negative number). This is called \textit{cross-entropy loss}}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+
+
 
 
 \end{document}
