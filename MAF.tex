@@ -150,7 +150,7 @@
 \begin{frame}{More complicated distributions}
     \begin{itemize}
       \item{So far we have looked at binary distributions.}
-	\item{Here the probability density could be described by a single number ($= p(x_i = 1)$). So output $\tilde{x_i}$ has dual meaning as `best guess at $x_i$' and as `$p(x_i = 1 | x1, \dots, x_{i-1})$'.}
+	\item{Here the probability density could be described by a single number ($= p(x_i = 1)$). So output $\tilde{x_i}$ has dual meaning as `best guess at $x_i$' and as `$p(x_i = 1 | x_1, \dots, x_{i-1})$'.}
     \end{itemize}
 \end{frame}
 
@@ -173,8 +173,8 @@
 \begin{frame}{Sampling from the inferred probability density $\tilde{p}$}
     \begin{itemize}
       \item{As before we can create new samples with $D$ calls to the neural net.}
-	\item{At each step we randomly choose $u_i$ from $N(0, 1)$ and scale and shift it to get $\tilde{x_i} = \exp(\alpha) * u_i + \mu$.}
-	\item{At each step the $\alpha$ and $\mu$ come from a call to the net with $\tilde{x_1}, \dots, \tilde{x_{i-1}}$ as inputs.}
+	\item{At each step we randomly choose $u_i$ from $N(0, 1)$ and scale and shift it to get $\tilde{x}_i = \exp(\alpha) * u_i + \mu$.}
+	\item{At each step the $\alpha$ and $\mu$ come from a call to the net with $\tilde{x}_1, \dots, \tilde{x}_{i-1}$ as inputs.}
     \end{itemize}
 \end{frame}
 
@@ -211,17 +211,17 @@
      \includegraphics[height=5cm]{image_06}
 \end{frame}
 
-\begin{frame}{Example - Target distribution}
+\begin{frame}{Example - Target distribution $p$}
      \centering
      \includegraphics[height=7cm]{image_07}
 \end{frame}
 
-\begin{frame}{Example - inferred distribution}
+\begin{frame}{Example - inferred distribution $\tilde{p}$}
      \centering
      \includegraphics[height=5cm]{image_08}
 \end{frame}
 
-\begin{frame}{Inverse image of inferred distribution - should be $N(0, I)$}
+\begin{frame}{Inverse image $u = f^{-1}(\tilde{p})$ of inferred distribution - should be $N(0, I)$}
      \centering
      \includegraphics[height=5cm]{image_09}
 \end{frame}
@@ -234,7 +234,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{MAF - after two iterations}
+\begin{frame}{MAF - after two iterations $f_2^{-1}(f_1^{-1}(\tilde{p}))$}
      \centering
      \includegraphics[height=5cm]{image_10}
 \end{frame}
