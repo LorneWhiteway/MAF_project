@@ -55,7 +55,7 @@
   \end{block}
 \end{frame}
 
-\begin{frame}{Parrot training 1}
+\begin{frame}{Parrot training}
   \begin{block}{}
     \begin{itemize}
       \item{Simple example: single binary outcome. We want the parrot to mimic us when we say 'Yes' or 'No'.}
@@ -65,7 +65,7 @@
 \end{frame}
 
 
-\begin{frame}{Parrot training 2}
+\begin{frame}{Parrot training}
 	\begin{columns}
            \column{0.58\linewidth}
     \begin{itemize}
@@ -78,7 +78,7 @@
          \end{columns} 
 \end{frame}
 
-\begin{frame}{Deaf parrot 1}
+\begin{frame}{Deaf parrot}
 	\begin{columns}
            \column{0.58\linewidth}
     \begin{itemize}
@@ -92,13 +92,13 @@
          \end{columns} 
 \end{frame}
 
-\begin{frame}{Deaf parrot 2}
+\begin{frame}{Deaf parrot}
     \begin{itemize}
       \item{So by removing links from the neural network but still rewarding the network for mimicry we create a density estimator.}
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Two word phrase 1}
+\begin{frame}{Two word phrase}
     \begin{itemize}
       \item{Now consider two word phrases ("Yes, No").}
 	\item{If there is no correlation between the two words then we just need two deaf parrots.}
@@ -110,7 +110,7 @@
 \end{frame}
 
 
-\begin{frame}{Two word phrase 2}
+\begin{frame}{Two word phrase}
 	\begin{columns}
            \column{0.46\linewidth}
     \begin{itemize}
@@ -135,7 +135,7 @@
      \includegraphics[height=7cm]{image_04}
 \end{frame}
 
-\begin{frame}{Sampling from the inferred probability density $\tilde{p}$ 1}
+\begin{frame}{Sampling from the inferred probability density $\tilde{p}$ (1)}
     \begin{itemize}
       \item{Use $(0, 0)$ as input to get $(\tilde{x_1}, \tilde{x_2})$ as output;}
 	\item{Randomly choose $s_1$ in $\{0, 1\}$ with probability $\tilde{x_1}$ of being 1;}
@@ -170,7 +170,7 @@
 \end{frame}
 
 
-\begin{frame}{Sampling from the inferred probability density $\tilde{p}$ 2}
+\begin{frame}{Sampling from the inferred probability density $\tilde{p}$}
     \begin{itemize}
       \item{As before we can create new samples with $D$ calls to the neural net.}
 	\item{At each step we randomly choose $u_i$ from $N(0, 1)$ and scale and shift it to get $\tilde{x}_i = \exp(\alpha) * u_i + \mu$.}
@@ -178,7 +178,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Sampling from the inferred probability density $\tilde{p} $3}
+\begin{frame}{Sampling from the inferred probability density $\tilde{p}$}
     \begin{itemize}
       \item{Thus we get a mapping $f$ from $u \sim N(0, I)$ to $\tilde{x} \sim \tilde{p}$.}
 	\item{The mapping is easily invertible!}
@@ -188,7 +188,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Sampling from the inferred probability density $\tilde{p}$ 4}
+\begin{frame}{Sampling from the inferred probability density $\tilde{p}$}
     \begin{itemize}
       \item{Furthermore the autoregressive property means that the Jacobian of $f^{-1}$ is triangular.}
 	\item{Its diagonal elements are just the $exp(-\alpha_i)$ factors.}
