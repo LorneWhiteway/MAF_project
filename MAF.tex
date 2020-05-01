@@ -31,7 +31,7 @@
   \begin{block}{}
     \begin{itemize}
       \item{We want to do ML to do density estimation:}
-      \item{Find the probability density $p$, given a set of training data $\{x_i\}$ that we suppose to be a fair random sample from $p$.}
+      \item{We are given as training data some fair samples $\{x_i\}$ from a probability density $p$, and our goal is to find $p$.}
     \end{itemize}
   \end{block}
 \end{frame}
@@ -55,7 +55,7 @@
   \end{block}
 \end{frame}
 
-\begin{frame}{Parrot training}
+\begin{frame}{Parrot training 1}
   \begin{block}{}
     \begin{itemize}
       \item{Simple example: single binary outcome. We want the parrot to mimic us when we say 'Yes' or 'No'.}
@@ -65,7 +65,7 @@
 \end{frame}
 
 
-\begin{frame}{Parrot training}
+\begin{frame}{Parrot training 2}
 	\begin{columns}
            \column{0.58\linewidth}
     \begin{itemize}
@@ -78,7 +78,7 @@
          \end{columns} 
 \end{frame}
 
-\begin{frame}{Deaf parrot}
+\begin{frame}{Deaf parrot 1}
 	\begin{columns}
            \column{0.58\linewidth}
     \begin{itemize}
@@ -92,13 +92,13 @@
          \end{columns} 
 \end{frame}
 
-\begin{frame}{Deaf parrot}
+\begin{frame}{Deaf parrot 2}
     \begin{itemize}
       \item{So by removing links from the neural network but still rewarding the network for mimicry we create a density estimator.}
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Two word phrase}
+\begin{frame}{Two word phrase 1}
     \begin{itemize}
       \item{Now consider two word phrases ("Yes, No").}
 	\item{If there is no correlation between the two words then we just need two deaf parrots.}
@@ -110,11 +110,11 @@
 \end{frame}
 
 
-\begin{frame}{Two word phrase}
+\begin{frame}{Two word phrase 2}
 	\begin{columns}
            \column{0.46\linewidth}
     \begin{itemize}
-    \item{More generally if $\tilde{x_i}$ is linked only to $x_1, \dots x_{i-1}$ then we learn $p(x_1), \dots, p(x_i | x1 \dots x_{i-1})$, whose product is $p(x)$.}
+    \item{More generally if (for each $i$) $\tilde{x_i}$ is linked only to $x_1, \dots, x_{i-1}$ then we learn $p(x_1), \dots, p(x_i | x1, \dots, x_{i-1})$, whose product is $p(x)$.}
     \end{itemize}
           \column{0.5\linewidth}
              \centering
@@ -135,7 +135,7 @@
      \includegraphics[height=7cm]{image_04}
 \end{frame}
 
-\begin{frame}{Sampling from the inferred probability density}
+\begin{frame}{Sampling from the inferred probability density $\tilde{p}$ 1}
     \begin{itemize}
       \item{Use $(0, 0)$ as input to get $(\tilde{x_1}, \tilde{x_2})$ as output;}
 	\item{Randomly choose $s_1$ in $\{0, 1\}$ with probability $\tilde{x_1}$ of being 1;}
@@ -170,7 +170,7 @@
 \end{frame}
 
 
-\begin{frame}{Sampling from the inferred probability density $\tilde{p}$}
+\begin{frame}{Sampling from the inferred probability density $\tilde{p}$ 2}
     \begin{itemize}
       \item{As before we can create new samples with $D$ calls to the neural net.}
 	\item{At each step we randomly choose $u_i$ from $N(0, 1)$ and scale and shift it to get $\tilde{x}_i = \exp(\alpha) * u_i + \mu$.}
@@ -178,7 +178,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Sampling from the inferred probability density 1}
+\begin{frame}{Sampling from the inferred probability density $\tilde{p} $3}
     \begin{itemize}
       \item{Thus we get a mapping $f$ from $u \sim N(0, I)$ to $\tilde{x} \sim \tilde{p}$.}
 	\item{The mapping is easily invertible!}
@@ -188,7 +188,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Sampling from the inferred probability density 2}
+\begin{frame}{Sampling from the inferred probability density $\tilde{p}$ 4}
     \begin{itemize}
       \item{Furthermore the autoregressive property means that the Jacobian of $f^{-1}$ is triangular.}
 	\item{Its diagonal elements are just the $exp(-\alpha_i)$ factors.}
@@ -234,7 +234,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{MAF - after two iterations $f_2^{-1}(f_1^{-1}(\tilde{p}))$}
+\begin{frame}{MAF - after four iterations $f^{-4}(\tilde{p}))$ - should be $N(0, I)$}
      \centering
      \includegraphics[height=5cm]{image_10}
 \end{frame}
